@@ -42,6 +42,16 @@ Traverse.prototype.set = function (ps, value) {
     return value;
 };
 
+Traverse.prototype.delete = function (ps) {
+    var node = this.value;
+    for (var i = 0; i < ps.length - 1; i ++) {
+        var key = ps[i];
+        if (!hasOwnProperty.call(node, key)) node[key] = {};
+        node = node[key];
+    }
+    delete node[ps[i]]
+};
+
 Traverse.prototype.map = function (cb) {
     return walk(this.value, cb, true);
 };
